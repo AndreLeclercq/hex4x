@@ -7,4 +7,4 @@ canvas.draw();
 
 ui.launch();
 
-ui.msg('content', 'Draw two regular hexagon like this');
+// ui.msg('content', 'Draw two regular hexagon like this');
