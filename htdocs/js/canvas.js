@@ -66,6 +66,11 @@ export function draw(){
 
 }
 
+export function drawGrid(){
+
+    //
+
+}
 
 export function draw2(){
     let radius = parseFloat(prompt('Quel rayon ?', 300))
