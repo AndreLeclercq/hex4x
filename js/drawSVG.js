@@ -5,7 +5,7 @@ export function grid(){
     // VARIABLE(S)
     let map = document.getElementById('map');
     let xGrid = '5';
-    let yGrid = '2';
+    let yGrid = '4';
 
 
     let hex = createGrid(120,'none',2.5,'#000', xGrid, yGrid);
@@ -51,7 +51,7 @@ function createGrid(hexSize, fill, strokeSize, strokeColor, xGrid, yGrid) {
 
             // CREATE POLY
             let poly = document.createElementNS(xmlns, "polygon");
-            poly.setAttribute('id', i + '-' + p);
+            poly.setAttribute('id', p + '-' + i);
             poly.setAttribute('fill', fill);
             poly.setAttribute('stroke', strokeColor);
             poly.setAttribute('stroke-width', strokeSize + 'px');
