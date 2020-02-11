@@ -20,37 +20,45 @@ function createGrid(hexSize, fill, strokeSize, strokeColor, xGrid, yGrid) {
 
     // CREATE SVG
     let svgElement = document.createElementNS(xmlns, 'svg');
-    svgElement.setAttribute('width', (hexSize + strokeSize) * xGrid + 'px' );
-    svgElement.setAttribute('height', (hexSize + strokeSize) * yGrid + 'px' );
+    svgElement.setAttribute('width', ( hexSize + strokeSize ) * xGrid + 'px' );
+    svgElement.setAttribute('height', ( hexSize + strokeSize ) * yGrid + 'px' );
 
     // DEFINE FIRST COORDS
     const radian = 60 * Math.PI / 180;
     let points = [];
 
-    let coordinatesX = (rad) => Math.cos(rad) * (hexSize/2) + (hexSize/2) + (strokeSize/2);
-    let coordinatesY = (rad) => Math.sin(rad) * (hexSize/2) + (hexSize/2) + (strokeSize/2);
+    let coordinatesX = (rad) => Math.cos(rad) * (hexSize / 2) + (hexSize / 2) + (strokeSize / 2);
+    let coordinatesY = (rad) => Math.sin(rad) * (hexSize / 2) + (hexSize / 2) + (strokeSize / 2);
 
     points.push([ coordinatesX(0), coordinatesY(0) ]);
     console.log(points);
-    // DRAW ROW GRID
-    for( let i = 0 ; i < xGrid ; i++ ){
 
-        // Variables
-        points = [];
-        let gapY = i % 2 === 0 ? hexSize * .45 : 0;
-        let gapX = ( hexSize * .75 ) * i;
+    //DRAW COL GRID
+    for( let p = 0 ; p < yGrid ; p++){
 
-        for( let y = 0 ; y < 6 ; y++ ){
-            points.push([ coordinatesX(radian * y ) + gapX, coordinatesY(radian * y ) + gapY ]);
+
+        // DRAW ROW GRID
+        for( let i = 0 ; i < xGrid ; i++ ){
+
+            // Variables
+            points = [];
+            let gapY = i % 2 === 0 ? ( hexSize * .45 ) + ( hexSize * p ) :  hexSize * p;
+            let gapX = ( hexSize * .75 ) * i;
+
+            for( let t = 0 ; t < 6 ; t++ ){
+                points.push([ coordinatesX(radian * t ) + gapX, coordinatesY(radian * t ) + gapY ]);
+            }
+
+            // CREATE POLY
+            let poly = document.createElementNS(xmlns, "polygon");
+            poly.setAttribute('id', i + '-' + p);
+            poly.setAttribute('fill', fill);
+            poly.setAttribute('stroke', strokeColor);
+            poly.setAttribute('stroke-width', strokeSize + 'px');
+            poly.setAttribute('points', points.join(' '));
+            svgElement.appendChild(poly);
+
         }
-
-        // CREATE POLY
-        let poly = document.createElementNS(xmlns, "polygon");
-        poly.setAttribute('fill', fill);
-        poly.setAttribute('stroke', strokeColor);
-        poly.setAttribute('stroke-width', strokeSize + 'px');
-        poly.setAttribute('points', points.join(' '));
-        svgElement.appendChild(poly);
 
     }
 
