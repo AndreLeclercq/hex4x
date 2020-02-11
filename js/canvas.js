@@ -20,8 +20,8 @@ export function draw(){
     let moveX = Math.cos(rad30) * size;
     let moveY = Math.sin(rad30) * size;
 
-    const hypot1 = Math.hypot( Math.sqrt(size/2), Math.sqrt(size/2 ) );
-    const hypot2 = Math.hypot( Math.sqrt(size/2), Math.sqrt(hypot1/2 ) );
+    const hypot1 = Math.hypot( Math.sqrt(size / 2), Math.sqrt(size / 2 ) );
+    const hypot2 = Math.hypot( Math.sqrt(size / 2), Math.sqrt(hypot1 / 2 ) );
 
     let polyFirst = [];
     let polyOdd = [];
