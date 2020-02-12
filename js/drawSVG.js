@@ -4,11 +4,11 @@ export function grid(){
 
     // VARIABLE(S)
     let map = document.getElementById('map');
-    let xGrid = '5';
-    let yGrid = '4';
+    let xGrid = '8';
+    let yGrid = '8';
 
 
-    let hex = createGrid(120,'none',2.5,'#000', xGrid, yGrid);
+    let hex = createGrid(120,'none',2,'#000', xGrid, yGrid);
     map.appendChild(hex);
 
 }
@@ -20,7 +20,7 @@ function createGrid(hexSize, fill, strokeSize, strokeColor, xGrid, yGrid) {
 
     // CREATE SVG
     let svgElement = document.createElementNS(xmlns, 'svg');
-    svgElement.setAttribute('width', ( hexSize + strokeSize ) * xGrid + 'px' );
+    svgElement.setAttribute('width', ( hexSize + strokeSize ) * ( xGrid - 1 ) + 'px' );
     svgElement.setAttribute('height', ( hexSize + strokeSize ) * yGrid + 'px' );
 
     // DEFINE FIRST COORDS
@@ -42,7 +42,7 @@ function createGrid(hexSize, fill, strokeSize, strokeColor, xGrid, yGrid) {
 
             // Variables
             points = [];
-            let gapY = i % 2 === 0 ? ( hexSize * .45 ) + ( hexSize * p ) :  hexSize * p;
+            let gapY = i % 2 === 0 ? ( hexSize * .44 ) + ( ( hexSize * .86 ) * p ) :  ( hexSize * .86 ) * p;
             let gapX = ( hexSize * .75 ) * i;
 
             for( let t = 0 ; t < 6 ; t++ ){
