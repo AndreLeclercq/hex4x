@@ -1,17 +1,30 @@
 export function grid(){
 
-    console.log('Draw Grid Start');
-
     // VARIABLE(S)
-    let map = document.getElementById('map');
-    let xGrid = '8';
-    let yGrid = '8';
+    const map = document.getElementById('map');
+    const xGrid = '8';  // How many hexagon by row
+    const yGrid = '8';  // Hom many hexagon by column
 
+    // CREATE SVG ELEMENT (GRID)
+    let hex = createGrid(110,'none',2,'#000', xGrid, yGrid);
 
-    let hex = createGrid(120,'none',2,'#000', xGrid, yGrid);
+    // APPEND SVG ELEMENT TO DOM
     map.appendChild(hex);
 
 }
+
+/*
+ * ==============================================
+ *   CREATE GRID FUNCTION
+ * ==============================================
+ *
+ *  hexSize      = Hexagon Size (px)
+ *  fill         = SVG Attribute to color the hexagon
+ *  strokeSize   = Border width of the hexagon
+ *  xGrid        = number of hexagons to the X axe
+ *  yGrid        = number of hexagons to the Y axe
+ *
+ */
 
 function createGrid(hexSize, fill, strokeSize, strokeColor, xGrid, yGrid) {
 
@@ -31,20 +44,19 @@ function createGrid(hexSize, fill, strokeSize, strokeColor, xGrid, yGrid) {
     let coordinatesY = (rad) => Math.sin(rad) * (hexSize / 2) + (hexSize / 2) + (strokeSize / 2);
 
     points.push([ coordinatesX(0), coordinatesY(0) ]);
-    console.log(points);
 
     //DRAW COL GRID
     for( let p = 0 ; p < yGrid ; p++){
 
-
         // DRAW ROW GRID
         for( let i = 0 ; i < xGrid ; i++ ){
 
-            // Variables
+            // VARIABLE(S)
             points = [];
             let gapY = i % 2 === 0 ? ( hexSize * .44 ) + ( ( hexSize * .86 ) * p ) :  ( hexSize * .86 ) * p;
             let gapX = ( hexSize * .75 ) * i;
 
+            // DEFINE POINTS ARRAY
             for( let t = 0 ; t < 6 ; t++ ){
                 points.push([ coordinatesX(radian * t ) + gapX, coordinatesY(radian * t ) + gapY ]);
             }
@@ -56,13 +68,15 @@ function createGrid(hexSize, fill, strokeSize, strokeColor, xGrid, yGrid) {
             poly.setAttribute('stroke', strokeColor);
             poly.setAttribute('stroke-width', strokeSize + 'px');
             poly.setAttribute('points', points.join(' '));
+
+            // ADD POLY TO SVG ELEMENT
             svgElement.appendChild(poly);
 
         }
 
     }
 
-    // RETURN SVG
+    // RETURN SVG ELEMENT
     return svgElement;
 
 }
